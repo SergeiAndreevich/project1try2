@@ -1,11 +1,17 @@
-import express, { Express } from "express";
+import express, { Express, Request,Response } from "express";
+import {PATH} from "./core/path/path";
+import {videosRouter} from "./routers/videos.router";
 
 export const setupApp = (app: Express) => {
     app.use(express.json()); // middleware для парсинга JSON в теле запроса
 
-    // основной роут
-    app.get("/", (req, res) => {
-        res.status(200).send("Hello world!");
+    app.get('/', (req: Request, res: Response) => {
+        res.status(200).send(`go to ${PATH.videos}`);
     });
+
+    app.use(PATH.videos, videosRouter);
+    //app.use('/api/testing', testingRouter);
+
+    //setupSwagger(app);
     return app;
 };
