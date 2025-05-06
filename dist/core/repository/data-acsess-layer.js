@@ -30,5 +30,8 @@ exports.repository = {
     },
     removeVideo: function (index) {
         videos_db_1.videosDB.videos.splice(index, 1);
+    },
+    clearDB: function () {
+        return videos_db_1.videosDB.videos = [];
     }
 };

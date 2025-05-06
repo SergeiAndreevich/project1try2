@@ -30,5 +30,8 @@ export const repository = {
     },
     removeVideo: function (index:number){
         videosDB.videos.splice(index, 1);
+    },
+    clearDB: function (){
+        return videosDB.videos = [];
     }
 }

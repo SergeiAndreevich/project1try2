@@ -1,4 +1,4 @@
 export const PATH = {
-    videos: '/api/videos',
-    testing: '/testing'
+    videos: '/hometask_01/api/videos',
+    testing: '/hometask_01/api/testing'
 }
