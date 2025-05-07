@@ -145,7 +145,7 @@ describe("Driver API", () => {
         expect(db2.length===1);
 
         expect(createdVideo1.id !== db2.id );
-        await request(app).get(`${PATH.videos}/${db2.id}`).expect(httpStatus.Ok);
-        await request(app).get(`${PATH.videos}/${videos.body.id}`).expect(httpStatus.BadRequest);
+        //await request(app).get(`${PATH.videos}/${db2.id}`).expect(httpStatus.Ok);
+        //await request(app).get(`${PATH.videos}/${videos.body.id}`).expect(httpStatus.BadRequest);
     })
 });

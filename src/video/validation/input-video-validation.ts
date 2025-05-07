@@ -29,7 +29,7 @@ export const validateVideo = (inputVideo:InputVideo): ValidationError[] => {
         inputVideo.canBeDownloaded !== undefined &&
         typeof inputVideo.canBeDownloaded !== "boolean"
     ) {
-        errors.push({ field: 'can be downloaded', message: 'Invalid field' })
+        errors.push({ field: 'canBeDownloaded', message: 'Invalid field' })
     }
     // is there min age restriction? is it correct?
     if (
@@ -42,36 +42,36 @@ export const validateVideo = (inputVideo:InputVideo): ValidationError[] => {
         inputVideo.minAgeRestriction !== undefined &&
         inputVideo.minAgeRestriction > 100
     ) {
-        errors.push({ field: 'min age restriction', message: 'Invalid age' })
+        errors.push({ field: 'minAgeRestriction', message: 'Invalid age' })
     }
     // created at
     if (inputVideo.createdAt && typeof inputVideo.createdAt !== 'string'
     ){
-        errors.push({ field: 'created at', message: 'Invalid date of creation' })
+        errors.push({ field: 'createdAt', message: 'Invalid date of creation' })
     }
     // publication date
     if (inputVideo.publicationDate && typeof inputVideo.publicationDate !== 'string'
     ){
-        errors.push({ field: 'publication date', message: 'Invalid date of publication' })
+        errors.push({ field: 'publicationDate', message: 'Invalid date of publication' })
     }
     // are available resolutions correct?
     if(
         !Array.isArray(inputVideo.availableResolutions) ||
         inputVideo.availableResolutions.length === 0 || inputVideo.availableResolutions.length > 8
     ){
-        errors.push({ field: 'video resolutions', message: 'Invalid video resolution' })
+        errors.push({ field: 'videoResolutions', message: 'Invalid video resolution' })
     }
     if (inputVideo.availableResolutions.length !== 0){
         const allowedResolutions = [VideoResolutions.P144,VideoResolutions.P240,VideoResolutions.P360,
             VideoResolutions.P480, VideoResolutions.P720,VideoResolutions.P1080,VideoResolutions.P1440,VideoResolutions.P2160];
         //проверяем, не вносили ли дубликатов
         if((new Set(inputVideo.availableResolutions)).size !== inputVideo.availableResolutions.length){
-            errors.push({field:'video resolutions', message:'no duplicates please'})
+            errors.push({field:'videoResolutions', message:'no duplicates please'})
         }
         //проверяем на совпадение с допустимыми форматами
         inputVideo.availableResolutions.forEach(resolution => {
             if (!allowedResolutions.includes(resolution)) {
-                errors.push({ field: 'video resolutions', message: 'Invalid video resolution' })
+                errors.push({ field: 'videoResolutions', message: 'Invalid video resolution' })
             }
         })
     }
