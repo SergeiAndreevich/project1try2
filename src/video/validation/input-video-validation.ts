@@ -59,19 +59,19 @@ export const validateVideo = (inputVideo:InputVideo): ValidationError[] => {
         !Array.isArray(inputVideo.availableResolutions) ||
         inputVideo.availableResolutions.length === 0 || inputVideo.availableResolutions.length > 8
     ){
-        errors.push({ field: 'videoResolutions', message: 'Invalid video resolution' })
+        errors.push({ field: 'availableResolutions', message: 'Invalid video resolution' })
     }
     if (inputVideo.availableResolutions.length !== 0){
         const allowedResolutions = [VideoResolutions.P144,VideoResolutions.P240,VideoResolutions.P360,
             VideoResolutions.P480, VideoResolutions.P720,VideoResolutions.P1080,VideoResolutions.P1440,VideoResolutions.P2160];
         //проверяем, не вносили ли дубликатов
         if((new Set(inputVideo.availableResolutions)).size !== inputVideo.availableResolutions.length){
-            errors.push({field:'videoResolutions', message:'no duplicates please'})
+            errors.push({field:'availableResolutions', message:'no duplicates please'})
         }
         //проверяем на совпадение с допустимыми форматами
         inputVideo.availableResolutions.forEach(resolution => {
             if (!allowedResolutions.includes(resolution)) {
-                errors.push({ field: 'videoResolutions', message: 'Invalid video resolution' })
+                errors.push({ field: 'availableResolutions', message: 'Invalid video resolution' })
             }
         })
     }
