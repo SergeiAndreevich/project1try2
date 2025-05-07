@@ -5,6 +5,6 @@ import {ValidationError} from "../types/validationErrors";
 // }
 export const createErrorsMessages = (
     errors: ValidationError[],
-): { errorMessages: ValidationError[] } => {
-    return { errorMessages: errors };
+): { errorsMessages: ValidationError[] } => {
+    return { errorsMessages: errors };
 };
