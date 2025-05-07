@@ -1,0 +1,12 @@
+{
+  "version":2,
+  "name": "Videos API second try",
+  "builds": [{
+    "src": "src/index.ts",
+    "use": "@vercel/node"
+  }],
+  "routes": [{
+    "src": "/(.*)",
+    "dest": "src/index.ts"
+  }]
+}
