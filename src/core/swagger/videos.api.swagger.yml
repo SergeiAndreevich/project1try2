@@ -1,0 +1,112 @@
+openapi: 3.0.0
+info:
+  title: Videos API
+  version: 1.0.0
+  description: Video hosting API
+paths:
+  /hometask_01/api/videos:
+    get:
+      summary: Получение всех видео
+      description: Возвращает массив всех видео
+      responses:
+        '200':
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Video'  #Ссылка на схему Video
+    post:
+      summary: Создание нового видео
+      description: Создает новое видео в БД.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateVideo'
+      responses:
+        '201':
+          description: Пользователь успешно создан
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Video'
+        '400':
+          description: Неверный запрос
+components:
+  schemas:
+    VideoResolutions:
+      required: true
+      type: array
+      description: Доступные разрешения видео
+      items:
+        type: string  # Тип элементов массива - строка
+        enum: # Перечисление допустимых значений
+          - P144
+          - P240
+          - P360
+          - P480
+          - P720
+          - P1080
+          - P1440
+          - P2160
+    Video:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: ID пользователя
+          required: true
+        title:
+          type: string
+          description: Название видео
+          required: true
+        author:
+          type: string
+          description: Имя автора
+          required: true
+        canBeDownloaded:
+          type: boolean
+          description: Доступно ли к скачиванию
+          default: false
+          required: true
+        minAgeRestrictions:
+          type: integer
+          minimum: 1
+          maximum: 18
+          required: true
+          default: null
+          description: Ограничение по возрасту
+        createdAt:
+          type: string
+          required: true
+          description: Дата создания
+        publicationDate:
+          type: string
+          required: true
+          description: Дата публикации
+          default: +1 к createdAt
+        availableResolutions:
+          type: array
+          description: Доступные разрешения видео
+          required: true
+          $ref: '#/components/schemas/VideoResolutions'
+    CreateVideo:
+      type: object
+      properties:
+        title:
+          type: string
+          required: true
+          description: Title
+        author:
+          type: string
+          required: true
+          description: Author
+        availableResolutions:
+          type: array
+          description: Доступные разрешения видео
+          required: true
+          $ref: '#/components/schemas/VideoResolutions'
+

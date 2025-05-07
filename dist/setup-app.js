@@ -8,6 +8,7 @@ const express_1 = __importDefault(require("express"));
 const path_1 = require("./core/path/path");
 const videos_router_1 = require("./routers/videos.router");
 const testing_router_1 = require("./routers/testing.router");
+const setup_swagger_1 = require("./core/swagger/setup-swagger");
 const setupApp = (app) => {
     app.use(express_1.default.json()); // middleware для парсинга JSON в теле запроса
     app.get('/', (req, res) => {
@@ -15,7 +16,7 @@ const setupApp = (app) => {
     });
     app.use(path_1.PATH.videos, videos_router_1.videosRouter);
     app.use(path_1.PATH.testing, testing_router_1.testingRouter);
-    //setupSwagger(app);
+    (0, setup_swagger_1.setupSwagger)(app);
     return app;
 };
 exports.setupApp = setupApp;
