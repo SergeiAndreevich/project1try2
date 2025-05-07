@@ -68,8 +68,8 @@ exports.videosRouter
 })
     .delete('/:id', (req, res) => {
     const id = parseInt(req.params.id);
-    const index = data_acsess_layer_1.repository.findIndex(id);
-    if (index === -1) {
+    const video = data_acsess_layer_1.repository.findVideo(id);
+    if (video === null) {
         res.status(httpStatuses_1.httpStatus.NotFound).send('Video not found');
         return;
     }

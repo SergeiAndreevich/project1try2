@@ -123,4 +123,27 @@ describe("Driver API", () => {
        expect(afterDB).toBeInstanceOf(Array);
        expect(afterDB.length===1);
     });
+    it('should remove video', async ()=>{
+        const newVideo = {...testVideo, title: 'title to remove'};
+        const video1 = await request(app).post(PATH.videos).send(newVideo).expect(httpStatus.Created);
+        const createdVideo1: Video = video1.body;
+        expect(createdVideo1).toBeDefined();
+        await request(app).delete(`${PATH.videos}/${createdVideo1.id}`).expect(httpStatus.NoContent);
+        const videos = await request(app).get(PATH.videos).expect(httpStatus.Ok);
+        const db = videos.body;
+        expect(db).toBeInstanceOf(Array);
+        expect(db.length===0);
+
+        const secondVideo = {...testVideo, title:'Another video'};
+        const video2 = await request(app).post(PATH.videos).send(secondVideo).expect(httpStatus.Created);
+        const createdVideo2: Video = video2.body;
+        expect(createdVideo2).toBeDefined();
+
+        const videos2 = await request(app).get(PATH.videos).expect(httpStatus.Ok);
+        const db2 = videos2.body;
+        expect(db2).toBeInstanceOf(Array);
+        expect(db2.length===1);
+
+        expect(createdVideo1.id !== db2.id );
+    })
 });

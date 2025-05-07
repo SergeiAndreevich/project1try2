@@ -72,11 +72,12 @@ videosRouter
     })
     .delete('/:id',(req:Request,res:Response)=>{
         const id = parseInt(req.params.id);
-        const index = repository.findIndex(id);
-        if(index === -1){
+        const video = repository.findVideo(id);
+        if(video === null){
             res.status(httpStatus.NotFound).send('Video not found');
             return
         }
+
         repository.removeVideo(id)
         res.status(httpStatus.NoContent).send('Deleted')
     })

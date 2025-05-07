@@ -15,6 +15,7 @@ exports.repository = {
     },
     createVideo: function (video) {
         videos_db_1.videosDB.videos.push(video);
+        return;
     },
     udpateVideo: function (oldVideo, video) {
         oldVideo.title = video.title;
@@ -23,13 +24,19 @@ exports.repository = {
         oldVideo.minAgeRestriction = video.minAgeRestriction;
         oldVideo.publicationDate = video.publicationDate;
         oldVideo.availableResolutions = video.availableResolutions;
+        return;
     },
     findIndex: function (id) {
         const index = videos_db_1.videosDB.videos.findIndex(v => v.id === id);
         return index;
     },
-    removeVideo: function (index) {
+    removeVideo: function (id) {
+        const index = videos_db_1.videosDB.videos.findIndex((v) => v.id === id);
+        if (index === -1) {
+            throw new Error('Video does not exist');
+        }
         videos_db_1.videosDB.videos.splice(index, 1);
+        return;
     },
     clearDB: function () {
         return videos_db_1.videosDB.videos = [];
