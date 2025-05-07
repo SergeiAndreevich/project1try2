@@ -40,7 +40,7 @@ export const validateVideo = (inputVideo:InputVideo): ValidationError[] => {
         inputVideo.minAgeRestriction !== undefined &&
         inputVideo.minAgeRestriction < 0 ||
         inputVideo.minAgeRestriction !== undefined &&
-        inputVideo.minAgeRestriction > 100
+        inputVideo.minAgeRestriction > 18
     ) {
         errors.push({ field: 'minAgeRestriction', message: 'Invalid age' })
     }
