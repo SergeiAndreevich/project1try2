@@ -41,7 +41,7 @@ exports.videosRouter
         title: req.body.title,
         author: req.body.author,
         canBeDownloaded: (_a = req.body.canBeDownloaded) !== null && _a !== void 0 ? _a : false,
-        minAgeRestriction: (_b = req.body.minAgeRestriction) !== null && _b !== void 0 ? _b : 18,
+        minAgeRestriction: (_b = req.body.minAgeRestriction) !== null && _b !== void 0 ? _b : null,
         createdAt: req.body.createdAt || new Date().toISOString(),
         publicationDate: req.body.publicationDate || new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
         availableResolutions: req.body.availableResolutions
